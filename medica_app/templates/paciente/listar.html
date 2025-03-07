@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar Clientes
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>TDI</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if pacientes %}
+                {% for paciente in pacientes %}
+                <tr>
+                    <td>{{ paciente.tipo_doc }}</td>
+                    <td>{{ paciente.num_doc }}</td>
+                    <td>{{ paciente.first_name }}</td>
+                    <td>{{ paciente.last_name }}</td>
+                    <td>{{ paciente.tipo }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_paciente' paciente.id %}">Actualizar</a>
+                        <a href="{% url 'eliminar_paciente' paciente.id %}" onclick="return confirm('¿Realmente desea eliminar este paciente?')">Eliminar</a>
+                        <a href="{% url 'detallar_paciente' paciente.id %}">Detalles</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay pacientes registrados en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar medicos
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>TDI</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Carnet</th>
+                <th>Especialilidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if medicos %}
+                {% for medico in medicos %}
+                <tr>
+                    <td>{{ medico.tipo_doc }}</td>
+                    <td>{{ medico.num_doc }}</td>
+                    <td>{{ medico.first_name }}</td>
+                    <td>{{ medico.last_name }}</td>
+                    <td>{{ medico.numero_carnet }}</td>
+                    <td>{{ medico.especialidad }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_medico' medico.id %}" onclick="return confirm('¿Realmente desea eliminar este médico?')">Eliminar</a>
+                        <a href="{% url 'detallar_medico' medico.id %}">Detalles</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay médicos registrados en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

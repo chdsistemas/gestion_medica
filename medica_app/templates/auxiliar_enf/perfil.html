@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Perfil Auxilar de enfermería
+{% endblock %}
+
+{% block content %}
+    
+    {% if tipo_usuario %}
+    <p>Bienvenido señor(a)- {{ user.last_name }}</p>
+        <p>{{ tipo_usuario }}</p>
+    {% endif %}
+
+{% endblock %}

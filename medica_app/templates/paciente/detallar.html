@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalle del Paciente
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TDI</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Correo</th>
+                <th>Ciudad</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ paciente.id }}</td>
+                    <td>{{ paciente.tipo_doc }}</td>
+                    <td>{{ paciente.num_doc }}</td>
+                    <td>{{ paciente.first_name }}</td>
+                    <td>{{ paciente.last_name }}</td>
+                    <td>{{ paciente.tipo }}</td>
+                    <td>{{ paciente.email }}</td>
+                    <td>{{ paciente.ciudad_res }}</td>
+                    <td>{{ paciente.direccion }}</td>
+                    <td>{{ paciente.telefono }}</td>
+                    <td>
+                        {% if paciente.imagen %}
+                            <img src="{{ paciente.imagen.url }}" alt="Imagen {{ paciente.first_name }}" width="150">
+                        {% else %}
+                        <img src="{% static 'img/default_user.png' %}" alt="Imagen del paciente" width="150"> 
+                        {% endif %}                                
+                    </td>
+                </tr>
+                <tr>
+                    <a href="{% url 'actualizar_paciente' paciente.id %}">
+                        <button>Actualizar mis datos</button>
+                    </a>
+                </tr>
+        </tbody>
+    </table>
+{% endblock %}

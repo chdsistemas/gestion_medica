@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar Administrador de Sistema
+{% endblock %}
+
+{% block content %}
+
+    <h1>Actualizar Administrador de Sistema</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
+            Actualizar Administrador de Sistema
+        </button>
+    </form>
+{% endblock %}

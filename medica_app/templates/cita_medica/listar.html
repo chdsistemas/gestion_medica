@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar citas médicas
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre paciente</th>
+                <th>Mombre medico</th>
+                <th>Especialidad</th>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Consultorio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if citas %}
+                {% for cita in citas %}
+                <tr>
+                    <td>{{ cita.id }}</td>
+                    <td>{{ cita.paciente.first_name }} {{ cita.paciente.last_name }}</td>
+                    <td>{{ cita.medico.first_name }} {{ cita.medico.last_name }} </td>
+                    <td>{{ cita.medico.especialidad }}</td>
+                    <td>{{ cita.ciudad }}</td>
+                    <td>{{ cita.direccion }}</td>
+                    <td>{{ cita.fecha }}</td>
+                    <td>{{ cita.hora }}</td>
+                    <th>{{ cita.estado }}</th>
+                    <td>{{ cita.consultorio }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay citas médicas en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,264 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333333;
+    background-color: #f4f6f8; /* Fondo claro y profesional */
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Navegación */
+nav {
+    background-color:#19dc6a; /* Color corporativo oscuro */
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #0056b3; /* Resaltado al pasar el cursor */
+}
+
+/* Contenido principal */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+main h1, main h2, main h3 {
+    color: #333333;
+    margin-bottom: 1rem;
+}
+
+main p {
+    margin-bottom: 1.5rem;
+    color: #555555;
+}
+
+/* Pie de página */
+footer {
+    background-color: #95b026;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: #19dc6a;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #2ecc71; /* Resaltado de enlaces en el pie de página */
+}
+
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form h2 {
+    color: #333333;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #f4f6f8;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #0056b3;
+    outline: none;
+    background-color: #ffffff;
+}
+
+textarea {
+    resize: vertical; /* Permite al usuario ajustar el tamaño verticalmente */
+    min-height: 100px;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #003f7f;
+}
+
+button[type="submit"]:active {
+    background-color: #002a5e;
+}
+
+/* Mensaje de error y éxito */
+.error-message {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+.success-message {
+    color: #5cb85c;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+
+
+/* Contenedor de la tabla */
+.table-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    color: #333333;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: #002244; /* Color corporativo */
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f4f6f8;
+}
+
+tr:hover {
+    background-color: #e8f1fc; /* Color de resaltado al pasar el cursor */
+}
+
+td {
+    font-weight: 400;
+}
+
+/* Estilo para celdas de encabezado */
+th:first-child,
+td:first-child {
+    border-left: none;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+/* Botones dentro de la tabla */
+table .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+table .btn-edit {
+    background-color: #5bc0de;
+}
+
+table .btn-edit:hover {
+    background-color: #31b0d5;
+}
+
+table .btn-delete {
+    background-color: #d9534f;
+}
+
+table .btn-delete:hover {
+    background-color: #c9302c;
+}
+
+

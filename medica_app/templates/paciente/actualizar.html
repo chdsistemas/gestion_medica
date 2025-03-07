@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar paciente
+{% endblock %}
+
+{% block content %}
+
+    <h1>Actualizar paciente</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
+            Actualizar paciente
+        </button>
+    </form>
+{% endblock %}
