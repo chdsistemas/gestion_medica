@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar Administradores de SIstema
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>TDI</th>
+                <th>Documento</th>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Profesión</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if administradores_s %}
+                {% for admin_s in administradores_s %}
+                <tr>
+                    <td>{{ admin_s.tipo_doc }}</td>
+                    <td>{{ admin_s.num_doc }}</td>
+                    <td>{{ admin_s.codigo }}</td>
+                    <td>{{ admin_s.first_name }}</td>
+                    <td>{{ admin_s.last_name }}</td>
+                    <td>{{ admin_s.profesion }}</td>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay médicos registrados en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -138,11 +138,13 @@ class FormularioAdministradorSistema(forms.ModelForm):
             'fecha_ingreso',
             'email',
             'password',           
-            'imagen'
+            'imagen',
+            'rol'
             ]
         widgets = {
             'password': forms.PasswordInput(),
             'fecha_nac': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_ingreso':forms.DateInput(attrs={'type': 'date'}),
             'imagen': forms.FileInput()
         }
 

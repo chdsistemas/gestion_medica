@@ -42,7 +42,9 @@ def login_usuario(request):
             if hasattr(usuario, 'medico'):
                 return render(request, 'medico/perfil.html', {'tipo_usuario': 'Medico'})
             elif hasattr(usuario, 'paciente'):
-                return render(request, 'paciente/perfil.html', {'tipo_usuario': 'Paciente'})
+                return render(request, 'paciente/perfil.html', {'tipo_usuario': 'Paciente'})            
+            elif hasattr(usuario, 'administrador_s'):
+                return render(request, 'administrador_s/perfil.html', {'tipo_usuario': 'Administrador de Sistema'})
             else:
                 return render(request, 'usuario/perfil.html', {'tipo_usuario': 'Usuario sin rol en el sistema'})
         return render(request, 'usuario/login.html', {'mensaje_error': 'Credenciales incorrectas, intente de nuevo.'})
@@ -278,10 +280,14 @@ def registrar_cita_medica(request):
     return render(request, 'cita_medica/insertar.html', {'formulario': formulario})
 
 
+
+
 @login_required
 def listar_citas_medicas(request):
     citas = CitaMedica.objects.all()
     return render(request, 'cita_medica/listar.html', {'citas': citas})
+
+
 
 @login_required
 def listar_mis_citas(request):
@@ -310,9 +316,35 @@ def actualizar_cita_medica(request, cita_medica_id):
     return render(request, 'cita_medica/actualizar.html', {'formulario': formulario})
 
 
+
 def eliminar_cita_medica(request, cita_medica_id):
     cita = get_object_or_404(CitaMedica, id=cita_medica_id)
     cita.delete()
     return redirect('listar_citas')
+#endregion
 
+
+#region Administrador de Sistema
+def registrar_administrador_sistema(request):
+    if request.method == 'POST':
+        formulario = FormularioAdministradorSistema(request.POST, request.FILES)
+        if formulario.is_valid():
+            administrador_s = formulario.save(commit=False)
+            # Cifra la contraseña utilizando set_password()
+            administrador_s.set_password(formulario.cleaned_data['password'])
+            administrador_s.save()
+            messages.success(request, 'Administrador de sistema creado exitosamente.')
+            return redirect('registrar_administrador_s')
+        else:
+            messages.error(request, 'Hay algunos errores en el registro. Vuelva a intentar...')
+    else:
+        formulario = FormularioAdministradorSistema()
+    return render(request, 'administrador_s/insertar.html', {'formulario': formulario})
+
+
+
+def listar_administradores_s(request):
+    administradores_s = AdministradorSistema.objects.all()
+    return render(request, 'administrador_s/listar.html', {'administradores_s': administradores_s})
+#endregion
 
