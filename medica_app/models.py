@@ -40,23 +40,18 @@ class Usuario(AbstractUser):
 
     # Personalizar cómo se guarda un usuario
     def save(self, *args, **kwargs):
-        if not self.id:
-            # Si es un Administrador de sistema, se registra y queda activo
-            if self.rol == "ADM":
-                self.is_active = True
-                if not self.password:
-                    self.set_password("CIDE25*")  # Contraseña inicial
-            else:
-                self.is_active = False  # Los otros  usuarios deben ser activados por el ADM
+        if not self.pk:  # Si el usuario es nuevo
+            self.rol = 'ADM'  # Asignar el rol automáticamente cuando se guarda un usuario administrador
+            self.is_active = True  # Activar automáticamente al administrador
+            self.set_password("CIDE2025*")  # Asignar la contraseña quemada
 
-                # Manejo de imagen
-        if self.id:
-            usuario_antiguo = Usuario.objects.filter(id=self.id).first()
-            if usuario_antiguo and usuario_antiguo.imagen:
-                if self.imagen != usuario_antiguo.imagen:
-                    usuario_antiguo.imagen.delete(save=False)  # Borrar imagen anterior 
-        
-        super().save(*args, **kwargs)
+    # Manejo de imagen si el usuario ya existe
+        if self.pk:
+            usuario_antiguo = Usuario.objects.filter(pk=self.pk).first()
+            if usuario_antiguo and usuario_antiguo.imagen and self.imagen != usuario_antiguo.imagen:
+                usuario_antiguo.imagen.delete(save=False)  # Eliminar la imagen anterior
+
+        super().save(*args, **kwargs)  # Guardar cambios en la base de datos
 
 
     

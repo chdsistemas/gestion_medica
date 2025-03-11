@@ -103,22 +103,23 @@ def actualizar_usuario(request):
 
 def listar_usuarios(request):
     usuarios = Usuario.objects.all().order_by('last_name')
+    print(request)
     conteo = Usuario.objects.count()
     return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
 
 
 
 def listar_usuarios_filtrados(request):
-    query = request.GET.get('query', '').strip()  # Obtener y limpiar la consulta del usuario
+    consultaSQL = request.GET.get('consultaSQL', '').strip()  # Obtener y limpiar la consulta del usuario
     usuarios = None  # Inicializar la variable usuarios
 
-    if query:  # Buscar solo si hay un valor escrito en el formulario
-        usuarios = Usuario.objects.filter(first_name__icontains = query)
+    if consultaSQL:  # Solo buscar si hay un valor en el campo
+        usuarios = Usuario.objects.filter(first_name = consultaSQL)
 
         if not usuarios:
             messages.info(request, "No se encontraron usuarios con ese nombre.")  # Mensaje si no hay resultados
 
-    return render(request, 'usuario/buscar.html', {'usuarios': usuarios, 'query': query})
+    return render(request, 'usuario/buscar.html', {'usuarios': usuarios, 'consultaSQL': consultaSQL})
 
 
 
@@ -349,7 +350,7 @@ def registrar_administrador_sistema(request):
         if formulario.is_valid():
             administrador_s = formulario.save(commit=False) # Solo guardar el objeto en memoria, más tarde se guarda en la bd
             # Cifra la contraseña utilizando set_password()
-            administrador_s.set_password(formulario.cleaned_data['password'])
+            #administrador_s.set_password(formulario.cleaned_data['password'])
             administrador_s.save()
             messages.success(request, 'Administrador de sistema creado exitosamente.')
             return redirect('registrar_administrador_s')
