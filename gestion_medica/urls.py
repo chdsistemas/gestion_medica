@@ -42,7 +42,8 @@ urlpatterns = [
 
     path('usuario/registrar/', registrar_usuario, name='registrar_usuario'),
     path('usuario/eliminar/<int:usuario_id>', eliminar_usuario, name='eliminar_usuario'),
-    path('usuario/listar/', listar_usuarios_filtrados, name='listar_usuarios'),
+    path('usuario/listar/', listar_usuarios_filtrados, name='listar_usuarios_filtrados'),
+    path('usuario/listar/', listar_usuarios, name='listar_usuarios'),
     path('usuario/actualizar/', actualizar_usuario, name='actualizar_usuario'),
     path('usuario/detallar/', detallar_usuario, name='detallar_usuario'),
     path('usuario/ver-perfil/', ver_perfil_usuario, name='perfil_usuario'),

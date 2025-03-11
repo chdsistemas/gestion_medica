@@ -101,34 +101,24 @@ def actualizar_usuario(request):
 
 
 
-def listar_usuarios_ordenados(request):
+def listar_usuarios(request):
     usuarios = Usuario.objects.all().order_by('last_name')
     conteo = Usuario.objects.count()
     return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
 
 
-def listar_usuarios_coincidentes(request):
-    usuarios = Usuario.objects.all()
-    conteo = Usuario.objects.count()
-    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
-
-
-def listar_usuarios_contiene_mayorque(request):
-    usuarios = Usuario.objects.all()
-    conteo = Usuario.objects.count()
-    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
-
-
-def listar_usuarios_menorque(request):
-    usuarios = Usuario.objects.all()
-    conteo = Usuario.objects.count()
-    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
-
 
 def listar_usuarios_filtrados(request):
-    usuarios = Usuario.objects.filter(fecha_nac__lte = '1960-01-01')
-    conteo = Usuario.objects.filter(fecha_nac__lte = '1960-01-01').count()
-    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
+    query = request.GET.get('query', '').strip()  # Obtener y limpiar la consulta del usuario
+    usuarios = None  # Inicializar la variable usuarios
+
+    if query:  # Buscar solo si hay un valor escrito en el formulario
+        usuarios = Usuario.objects.filter(first_name__icontains = query)
+
+        if not usuarios:
+            messages.info(request, "No se encontraron usuarios con ese nombre.")  # Mensaje si no hay resultados
+
+    return render(request, 'usuario/buscar.html', {'usuarios': usuarios, 'query': query})
 
 
 

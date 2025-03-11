@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Buscar usuarios en el sistema
+{% endblock %}
+
+{% block content %}
+
+    <h1>Buscar usuario</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="GET" action="{% url 'listar_usuarios' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
+        <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
+        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Nombre del usuario a buscar:">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if usuarios is not None %}
+        <h3>Resultados:</h3>
+        {% if usuarios %}
+            <ul>
+                {% for usuario in usuarios %}
+                    <li>{{ usuario.first_name }} {{ usuario.last_name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontraron usuarios con ese nombre.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
