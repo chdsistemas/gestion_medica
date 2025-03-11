@@ -101,17 +101,41 @@ def actualizar_usuario(request):
 
 
 
-def listar_usuarios(request):
+def listar_usuarios_ordenados(request):
     usuarios = Usuario.objects.all().order_by('last_name')
     conteo = Usuario.objects.count()
     return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
 
 
+def listar_usuarios_coincidentes(request):
+    usuarios = Usuario.objects.all()
+    conteo = Usuario.objects.count()
+    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
+
+
+def listar_usuarios_contiene_mayorque(request):
+    usuarios = Usuario.objects.all()
+    conteo = Usuario.objects.count()
+    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
+
+
+def listar_usuarios_menorque(request):
+    usuarios = Usuario.objects.all()
+    conteo = Usuario.objects.count()
+    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
+
+
+def listar_usuarios_filtrados(request):
+    usuarios = Usuario.objects.filter(fecha_nac__lte = '1960-01-01')
+    conteo = Usuario.objects.filter(fecha_nac__lte = '1960-01-01').count()
+    return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
+
+
 
 def eliminar_usuario(request, usuario_id):
-    usuario = get_object_or_404(Usuario, id=usuario_id)
+    usuario = get_object_or_404(Usuario, id = usuario_id)
     usuario.delete()
-    return redirect(listar_usuarios)
+    return redirect('listar_usuarios')
 
 
 
@@ -129,6 +153,7 @@ def detallar_usuario(request):
     return render(request, 'usuario/detallar.html', {'usuario': usuario })
 
 # endregion
+
 
 # region Medico
 
@@ -237,7 +262,7 @@ def detallar_paciente(request, paciente_id):
 
 
 def actualizar_paciente(request, paciente_id):
-    paciente = get_object_or_404(Paciente, id=paciente_id)  # Obtiene el paciente a editar
+    paciente = get_object_or_404(Paciente, id=paciente_id)  # Obtiene el paciente a actualizar
     if request.method == 'POST':
         formulario = FormularioPaciente(request.POST, instance=paciente)  # Envía el paciente actual
         if formulario.is_valid():
@@ -291,14 +316,16 @@ def listar_citas_medicas(request):
 
 @login_required
 def listar_mis_citas(request):
-    usuario = request.user  # Usuario autenticado, puede ser médico o paciente
+    usuario = request.user  # Usuario autenticado, puede ser médico, paciente, administrador de sistema, etc
     if  hasattr(usuario, 'medico'):
-        citas = CitaMedica.objects.filter(medico_id=usuario)
+        citas = CitaMedica.objects.filter(medico_id = usuario) # Filtrar las citas médicas del médico logueado
     elif hasattr(usuario, 'paciente'):
-        citas = CitaMedica.objects.filter(paciente_id=usuario)
+        citas = CitaMedica.objects.filter(paciente_id = usuario) # Filtrar las citas médicas del paciente logueado
     else:
         return redirect('home')  # Redirigir si no es ni médico ni paciente
     return render(request, 'cita_medica/listar.html', {'citas': citas})
+
+
 
 @login_required
 def actualizar_cita_medica(request, cita_medica_id):
@@ -317,6 +344,7 @@ def actualizar_cita_medica(request, cita_medica_id):
 
 
 
+
 def eliminar_cita_medica(request, cita_medica_id):
     cita = get_object_or_404(CitaMedica, id=cita_medica_id)
     cita.delete()
@@ -329,7 +357,7 @@ def registrar_administrador_sistema(request):
     if request.method == 'POST':
         formulario = FormularioAdministradorSistema(request.POST, request.FILES)
         if formulario.is_valid():
-            administrador_s = formulario.save(commit=False)
+            administrador_s = formulario.save(commit=False) # Solo guardar el objeto en memoria, más tarde se guarda en la bd
             # Cifra la contraseña utilizando set_password()
             administrador_s.set_password(formulario.cleaned_data['password'])
             administrador_s.save()
