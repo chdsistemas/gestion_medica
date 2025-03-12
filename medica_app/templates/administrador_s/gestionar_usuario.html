@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Gestionar usuarios activos
+{% endblock %}
+
+{% block content %}
+
+    <h1>Buscar usuario por documento de identidad</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="GET" action="{% url 'gestionar_usuario' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
+        <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
+        <input type="text" name="consultaSQL" value="{{ request.GET.consultaSQL }}" placeholder="Escriba el documento de identidad del usuario a gestionar:">
+        <button type="submit">Buscar Usuarios</button>
+    </form>
+
+    {% if usuarios is not None %}
+        <h3>Datos encontrados:</h3>
+        {% if usuarios %}
+            <ul>
+                {% for usuario in usuarios %}
+                    <table>
+                        <thead>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Rol</th>
+                            <th>Activo en sistema</th>
+                            <th>Accion</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ usuario.id }}</td>
+                                <td>{{ usuario.first_name }}</td>
+                                <td>{{ usuario.last_name }}</td>
+                                <td>{{ usuario.rol }}</td>
+                                <td>{{ usuario.is_active }}</td>
+                                <td>
+                                {% if usuario.is_active == False %}
+                                    <a href="">Activar</a>
+                                {% else %}
+                                    <a href="">DesActivar</a>
+                                {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontró el usuario. Verifique de nuevo.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

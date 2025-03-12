@@ -101,6 +101,7 @@ def actualizar_usuario(request):
 
 
 
+
 def listar_usuarios(request):
     usuarios = Usuario.objects.all().order_by('last_name')
     print(request)
@@ -108,7 +109,7 @@ def listar_usuarios(request):
     return render(request, 'usuario/listar.html', {'usuarios':usuarios, 'conteo': conteo})
 
 
-
+@login_required
 def listar_usuarios_filtrados(request):
     consultaSQL = request.GET.get('consultaSQL', '').strip()  # Obtener y limpiar la consulta del usuario
     usuarios = None  # Inicializar la variable usuarios
@@ -122,7 +123,7 @@ def listar_usuarios_filtrados(request):
     return render(request, 'usuario/buscar.html', {'usuarios': usuarios, 'consultaSQL': consultaSQL})
 
 
-
+@login_required
 def eliminar_usuario(request, usuario_id):
     usuario = get_object_or_404(Usuario, id = usuario_id)
     usuario.delete()
@@ -146,7 +147,7 @@ def detallar_usuario(request):
 # endregion
 
 
-# region Medico
+#region Medico
 
 def registrar_medico(request):
     if request.method == 'POST':
@@ -365,5 +366,20 @@ def registrar_administrador_sistema(request):
 def listar_administradores_s(request):
     administradores_s = AdministradorSistema.objects.all()
     return render(request, 'administrador_s/listar.html', {'administradores_s': administradores_s})
+
+
+@login_required
+def gestionar_usuario(request):
+    consultaSQL = request.GET.get('consultaSQL', '').strip()  # Obtener y limpiar la consulta del usuario
+    usuarios = None  # Inicializar la variable usuarios
+
+    if consultaSQL:  # Solo buscar si hay un valor en el campo
+        usuarios = Usuario.objects.filter(num_doc = consultaSQL)
+
+        if not usuarios:
+            messages.info(request, "No se encontraron usuarios con esta identidad.")  # Mensaje si no hay resultados
+
+    return render(request, 'administrador_s/gestionar_usuario.html', {'usuarios': usuarios, 'consultaSQL': consultaSQL})
+
 #endregion
 

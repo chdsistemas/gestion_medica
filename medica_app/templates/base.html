@@ -12,6 +12,7 @@
         <nav>
             <ul>
                 {% if request.user.is_authenticated %}
+
                     {% if request.user.medico %}
                         <li><a href="{% url 'perfil_medico' %}">Ver mi perfil médico</a></li>
                         <li><a href="#">Consultar historia clínica</a></li>
@@ -21,6 +22,9 @@
                     {% elif request.user.paciente %}
                         <li><a href="#">Ver mi perfil de paciente</a></li>
                         <li><a href="{% url 'registrar_cita' %}">Solicitar cita médica</a></li>
+                    
+                    {% elif request.user.rol == 'ADM' %}
+                        <li><li><a href="{% url 'gestionar_usuario' %}">Gestionar usuario</a></li></li>
 
                     {% else %}
                         <li><a href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>

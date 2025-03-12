@@ -58,6 +58,8 @@ urlpatterns = [
     path('cita/eliminar/<int:paciente_id>/', eliminar_paciente, name='eliminar_paciente'),
 
     path('admnistrador_sistema/registrar/', registrar_administrador_sistema, name='registrar_administrador_s'),
-    path('admnistrador_sistema/listar/', listar_administradores_s, name='listar_administradores_s')
+    path('admnistrador_sistema/listar/', listar_administradores_s, name='listar_administradores_s'),
+    path('admnistrador_sistema/gestionar/', gestionar_usuario, name='gestionar_usuario')
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

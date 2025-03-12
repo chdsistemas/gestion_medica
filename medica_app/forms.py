@@ -138,6 +138,7 @@ class FormularioAdministradorSistema(forms.ModelForm):
             'fecha_ingreso',
             'email',          
             'imagen',
+            'password'
             ]
         widgets = {
             'password': forms.PasswordInput(),
