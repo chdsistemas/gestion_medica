@@ -9,7 +9,7 @@
 {% block content %}
     
     {% if tipo_usuario %}
-    <p>Bienvenido señor(a)- {{ user.last_name }}</p>
+    <p>Bienvenido señor(a)- {{ user.last_name }} {{ user.first_name }}</p>
         <p>{{ tipo_usuario }}</p>
     {% endif %}
 

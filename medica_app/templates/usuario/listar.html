@@ -14,6 +14,8 @@
                 <th>Documento</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Rol</th>
+                <th>¿Activo?</th>
                 <th>Img</th>
                 <th>Acciones</th>
             </tr>
@@ -26,6 +28,8 @@
                     <td>{{ usuario.num_doc }}</td>
                     <td>{{ usuario.first_name }}</td>
                     <td>{{ usuario.last_name }}</td>
+                    <td>{{ usuario.rol }}</td>
+                    <td>{{ usuario.is_active }}</td>
                     <td>
                         {% if usuario.imagen %}
                             <img src="{{ usuario.imagen.url }}" alt="Imagen {{ usuario.first_name }}" width="100">
@@ -33,6 +37,7 @@
                             <img src="{% static 'img/default_user.png' %}" alt="Imagen del usuario" width="100"> 
                         {% endif %}
                     </td>
+                    <!---->
                     <td>
                         <a href="{% url 'eliminar_usuario' usuario.id %}" onclick="return confirm('¿Realmente desea eliminar este usuario?')">Eliminar</a>
                     </td>

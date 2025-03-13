@@ -14,7 +14,7 @@ import os
 LOGIN_URL = '/usuario/login/'
 
 SESSION_COOKIE_AGE = 600  # 600 segundos, la sesión dura hasta este tiempo en inactividad
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión se elimina al cerrar el navegador
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # La sesión se elimina al cerrar el navegador
 SESSION_SAVE_EVERY_REQUEST = True  # Reinicia el contador de tiempo con cada solicitud
 
 AUTH_USER_MODEL = 'medica_app.Usuario'

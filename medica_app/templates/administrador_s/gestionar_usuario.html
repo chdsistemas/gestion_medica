@@ -18,7 +18,7 @@
     <form method="GET" action="{% url 'gestionar_usuario' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
         <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
         <input type="text" name="consultaSQL" value="{{ request.GET.consultaSQL }}" placeholder="Escriba el documento de identidad del usuario a gestionar:">
-        <button type="submit">Buscar Usuarios</button>
+        <button type="submit">Buscar Usuario</button>
     </form>
 
     {% if usuarios is not None %}
@@ -44,9 +44,15 @@
                                 <td>{{ usuario.is_active }}</td>
                                 <td>
                                 {% if usuario.is_active == False %}
-                                    <a href="">Activar</a>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <a href="{% url 'activar_usuario' usuario.id %}" onclick="return confirm('¿Realmente desea activar este usuario?')">Activar</a>
+                                </form>
                                 {% else %}
-                                    <a href="">DesActivar</a>
+                                    <form method="post" action="{% url 'activar_usuario' usuario.id %}">
+                                        {% csrf_token %}
+                                        <a href="{% url 'activar_usuario' usuario.id %}" onclick="return confirm('¿Realmente desea DesActivar este usuario?')">DesActivar</a>
+                                    </form>
                                 {% endif %}
                                 </td>
                             </tr>

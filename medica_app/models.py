@@ -35,17 +35,12 @@ class Usuario(AbstractUser):
     direccion = models.CharField(max_length=100, blank=False, verbose_name='Dirección Residencia')
     telefono = models.CharField(max_length=50, blank=False, verbose_name='Teléfono')
     imagen = models.ImageField(upload_to=user_directory_path, blank=True, null=True, verbose_name='Imagen')
-    rol = models.CharField(max_length=20, choices=ROL, default='No asignado', verbose_name='Rol en la empresa')
+    rol = models.CharField(max_length=20, choices=ROL, default='ND', verbose_name='Rol en la empresa')
 
 
     # Personalizar cómo se guarda un usuario
+    # Guardado de la imagen del usuario en la superclase usuario reescribiendo método save()
     def save(self, *args, **kwargs):
-        if not self.pk:  # Si el usuario es nuevo
-            self.rol = 'ADM'  # Asignar el rol automáticamente cuando se guarda un usuario administrador
-            self.is_active = True  # Activar automáticamente al administrador
-            self.set_password("CIDE2025*")  # Asignar la contraseña quemada
-
-    # Manejo de imagen si el usuario ya existe
         if self.pk:
             usuario_antiguo = Usuario.objects.filter(pk=self.pk).first()
             if usuario_antiguo and usuario_antiguo.imagen and self.imagen != usuario_antiguo.imagen:
@@ -83,6 +78,12 @@ class Medico(Usuario):
 
     def __str__(self):
         return f'{self.first_name} - {self.last_name}'
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Solo asignar si el objeto es nuevo
+            self.is_active = False
+            self.rol = 'MED'
+        super().save(*args, **kwargs)
 
 
 
@@ -98,13 +99,23 @@ class Paciente(Usuario):
     tipo = models.CharField(max_length=50, blank=False, verbose_name='Tipo de paciente', choices=TIPO, default='ESTANDAR')
     genero = models.CharField(max_length=50, blank=False, verbose_name='Género de paciente', choices=GENERO, default='FEMENINO')
     
+    
     def __str__(self):
         return f'{self.first_name} - {self.last_name}'
+    
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Solo asignar si el objeto es nuevo
+            self.rol = 'PAC'
+            self.is_active = True
+        super().save(*args, **kwargs)
 
 
 
 class AdministradorSistema(Usuario):
+    ACCIONES = [('GU', 'Gestionar usuarios del sistema'), ('GS', 'Gestionar servicios de la entidad')]
     codigo = models.CharField(max_length=20)
+    acciones = models.CharField(max_length=20, choices=ACCIONES, default='GU')
     profesion = models.CharField(max_length=100)
     fecha_ingreso = models.DateField()
 
@@ -117,6 +128,14 @@ class AdministradorSistema(Usuario):
     def inhabilitar_usuario(self, usuario):
         usuario.is_active = True
         usuario.save()
+
+        
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.rol = 'ADM'
+            self.is_active = True  # Activar automáticamente
+            self.set_password("CIDE2025*")  # Un password asignado por el sistema
+        super().save(*args, **kwargs)
 
 
 

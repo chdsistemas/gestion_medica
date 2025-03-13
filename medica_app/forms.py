@@ -136,7 +136,8 @@ class FormularioAdministradorSistema(forms.ModelForm):
             'telefono',
             'fecha_nac',
             'fecha_ingreso',
-            'email',          
+            'email', 
+            'acciones',         
             'imagen',
             'password'
             ]

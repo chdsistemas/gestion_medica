@@ -16,6 +16,8 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Profesión</th>
+                <th>Rol</th>
+                <th>¿Activo?</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,8 @@
                     <td>{{ admin_s.first_name }}</td>
                     <td>{{ admin_s.last_name }}</td>
                     <td>{{ admin_s.profesion }}</td>
+                    <td>{{ admin_s.rol }}</td>
+                    <td>{{ admin_s.is_active }}</td>
                     </td>
                 </tr>
                 {% endfor %}

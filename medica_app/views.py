@@ -39,15 +39,15 @@ def login_usuario(request):
         if usuario is not None:
             login(request, usuario)
             # Verificar si el usuario es Médico u otros roles
-            if hasattr(usuario, 'medico'):
+            if hasattr(request.user, 'medico'):
                 return render(request, 'medico/perfil.html', {'tipo_usuario': 'Medico'})
-            elif hasattr(usuario, 'paciente'):
+            elif hasattr(request.user, 'paciente'):
                 return render(request, 'paciente/perfil.html', {'tipo_usuario': 'Paciente'})            
-            elif hasattr(usuario, 'administrador_s'):
+            elif hasattr(request.user, 'administradorsistema'):
                 return render(request, 'administrador_s/perfil.html', {'tipo_usuario': 'Administrador de Sistema'})
             else:
                 return render(request, 'usuario/perfil.html', {'tipo_usuario': 'Usuario sin rol en el sistema'})
-        return render(request, 'usuario/login.html', {'mensaje_error': 'Credenciales incorrectas, intente de nuevo.'})
+        return render(request, 'usuario/login.html', {'mensaje_error': 'Credenciales incorrectas, intente de nuevo o consulte con Administrador de Usuarios'})
     return render(request, 'usuario/login.html')
 
 
@@ -98,7 +98,6 @@ def actualizar_usuario(request):
     else:
         formulario = FormularioUsuario(instance=usuario)
     return render(request, 'usuario/actualizar.html', {'formulario': formulario})
-
 
 
 
@@ -371,15 +370,35 @@ def listar_administradores_s(request):
 @login_required
 def gestionar_usuario(request):
     consultaSQL = request.GET.get('consultaSQL', '').strip()  # Obtener y limpiar la consulta del usuario
-    usuarios = None  # Inicializar la variable usuarios
+    usuario = None  # Inicializar la variable usuarios
 
     if consultaSQL:  # Solo buscar si hay un valor en el campo
-        usuarios = Usuario.objects.filter(num_doc = consultaSQL)
+        usuario = Usuario.objects.filter(num_doc = consultaSQL)
 
-        if not usuarios:
+        if not usuario:
             messages.info(request, "No se encontraron usuarios con esta identidad.")  # Mensaje si no hay resultados
 
-    return render(request, 'administrador_s/gestionar_usuario.html', {'usuarios': usuarios, 'consultaSQL': consultaSQL})
+    return render(request, 'administrador_s/gestionar_usuario.html', {'usuarios': usuario, 'consultaSQL': consultaSQL})
+
+
+def ver_perfil_administrador_s(request):
+    return render(request, 'administrador_s/perfil.html')
+
+
+def activar_usuario(request, usuario_id):
+    usuario_activar = get_object_or_404(Usuario, id=usuario_id)
+    if usuario_activar == request.user:
+        messages.info(request, f"El usuario no tiene permiso para desativar su propia cuenta.")
+        return redirect('ver_perfil_administrador_s')
+    else:
+        usuario_activar.is_active = not usuario_activar.is_active  # Cambia el estado activo/inactivo
+        usuario_activar.save()
+
+        estado = "activado" if usuario_activar.is_active else "desactivado" # Condicional python ternario en una sola linea
+
+        messages.info(request, f"El usuario ha sido {estado} correctamente.")
+
+    return redirect('ver_perfil_administrador_s')
 
 #endregion
 
