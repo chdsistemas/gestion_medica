@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Buscar usuario por documento
+{% endblock %}
+
+{% block content %}
+
+    <h1>Búsqueda de usuarios por nombre</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="GET" action="{% url 'buscar_usuarios_nombre' %}">
+        <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
+        <input type="text" name="nombre" value="{{ request.GET.nombre }}" placeholder="Escriba el nombre del usuario:">
+        <button type="submit">Buscar Usuarios</button>
+    </form>
+
+    {% if usuarios is not None %}
+    <h3>Usuarios encontrados:</h3>
+    {% if usuarios %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Activo en sistema</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.num_doc }}</td>
+                    <td>{{ u.first_name }}</td>
+                    <td>{{ u.last_name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.rol }}</td>
+                    <td>{{ u.is_active }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se encontró un registro. Verifique de nuevo.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

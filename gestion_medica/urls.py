@@ -60,7 +60,10 @@ urlpatterns = [
     path('administrador_sistema/registrar/', registrar_administrador_sistema, name='registrar_administrador_s'),
     path('administrador_sistema/listar/', listar_administradores_s, name='listar_administradores_s'),
     path('administrador_sistema/gestionar/', gestionar_usuario, name='gestionar_usuario'),
-    path('administrador_sistema/activar/<int:usuario_id>', activar_usuario, name='activar_usuario'),
-    path('administrador_sistema/ver_perfil', ver_perfil_administrador_s, name='ver_perfil_administrador_s')
-
+    path('administrador_sistema/activar/<int:usuario_id>/', activar_usuario, name='activar_usuario'),
+    
+    path('administrador_sistema/ver_perfil/', ver_perfil_administrador_s, name='ver_perfil_administrador_s'),
+    
+    path('administrador_sistema/buscar_usuario_doc/', buscar_usuario_documento, name='buscar_usuario_documento'),
+    path('administrador_sistema/buscar_usuario_nombre/', buscar_usuarios_nombre, name='buscar_usuarios_nombre')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

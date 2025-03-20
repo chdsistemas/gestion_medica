@@ -5,6 +5,7 @@ from medica_app.forms import *
 from medica_app.models import Medico, Paciente
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.http import Http404, HttpResponse
 
 
 def home(request):
@@ -367,18 +368,44 @@ def listar_administradores_s(request):
     return render(request, 'administrador_s/listar.html', {'administradores_s': administradores_s})
 
 
-@login_required
+
 def gestionar_usuario(request):
-    consultaSQL = request.GET.get('consultaSQL', '').strip()  # Obtener y limpiar la consulta del usuario
-    usuario = None  # Inicializar la variable usuarios
+    documento = request.GET.get('documento')  # Obtiene el número de documento ingresado
+    usuario = None  # Inicializamos usuario en None para evitar errores en la plantilla
+    if documento:
+        try:
+            usuario = Usuario.objects.get(num_doc=documento)
+            messages.success(request, f'Usuario {usuario.num_doc} encontrado.')  # Mensaje de éxito
+        except Usuario.DoesNotExist:
+            messages.error(request, 'El usuario no existe.')  # Mensaje de error
+    return render(request, 'administrador_s/gestionar_usuario.html', {'usuario': usuario})
 
-    if consultaSQL:  # Solo buscar si hay un valor en el campo
-        usuario = Usuario.objects.filter(num_doc = consultaSQL)
 
-        if not usuario:
-            messages.info(request, "No se encontraron usuarios con esta identidad.")  # Mensaje si no hay resultados
 
-    return render(request, 'administrador_s/gestionar_usuario.html', {'usuarios': usuario, 'consultaSQL': consultaSQL})
+def buscar_usuario_documento(request):
+    documento = request.GET.get('documento')  # Obtiene el número de documento ingresado
+    usuario = None  # Inicializamos usuario en None para evitar errores en la plantilla
+    if documento:
+        try:
+            usuario = Usuario.objects.get(num_doc=documento)
+            messages.success(request, f'Usuario {usuario.num_doc} encontrado.')  # Mensaje de éxito
+        except Usuario.DoesNotExist:
+            messages.error(request, 'El usuario no existe.')  # Mensaje de error
+    return render(request, 'administrador_s/buscar_documento.html', {'usuario': usuario})
+
+
+
+
+def buscar_usuarios_nombre(request):
+    nombre = request.GET.get('nombre')  # Obtiene el nombre ingresado
+    usuarios = Usuario.objects.none()  # Inicializamos con un queryset vacío
+    if nombre:
+        usuarios = Usuario.objects.filter(first_name__icontains=nombre)
+        if usuarios.exists():
+            messages.success(request, 'Usuario(s) encontrado(s).')  # Mensaje de éxito
+        else:
+            messages.error(request, 'La búsqueda no arrojó resultados.')  # Mensaje de error    
+    return render(request, 'administrador_s/buscar_nombre.html', {'usuarios': usuarios})
 
 
 def ver_perfil_administrador_s(request):
