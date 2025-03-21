@@ -3,20 +3,30 @@
 {% load static %}
 
 {% block title %}
-    Buscar usuario por nombre
+    Buscar usuario por criterios
 {% endblock %}
 
 {% block content %}
 
-    <h1>Búsqueda de usuarios por nombre</h1>
+    <h1>Búsqueda de usuarios por criterios</h1>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
 
-    <form method="GET" action="{% url 'buscar_usuarios_nombre' %}">
-        <input type="text" name="nombre" value="{{ request.GET.nombre }}" placeholder="Escriba el nombre del usuario:">
+    <form method="GET" action="{% url 'buscar_usuarios_parametros' %}">
+        <label for="">Criterio de Búsqueda:</label>
+        <select name="criterio" id="">
+            <option value="documento">Número de documento</option>
+            <option value="nombre">Nombre</option>
+            <option value="apellido">Apellido</option>
+            <option value="correo">Correo</option>
+            <option value="activos">Usuarios Activos en Sistema</option>
+            <option value="inactivos">Usuarios Inactivos en Sistema</option>
+        </select>
+        <label for="">Escriba el dato a buscar:</label>
+        <input type="text" name="a_buscar" value="{{ request.GET.a_buscar }}" placeholder="Escriba el criterio de búsqueda">
         <button type="submit">Buscar Usuarios</button>
     </form>
 

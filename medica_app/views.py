@@ -48,7 +48,7 @@ def login_usuario(request):
                 return render(request, 'administrador_s/perfil.html', {'tipo_usuario': 'Administrador de Sistema'})
             else:
                 return render(request, 'usuario/perfil.html', {'tipo_usuario': 'Usuario sin rol en el sistema'})
-        return render(request, 'usuario/login.html', {'mensaje_error': 'Credenciales incorrectas, intente de nuevo o consulte con Administrador de Usuarios'})
+        return render(request, 'usuario/login.html', {'mensaje_error': 'Credenciales incorrectas, intente de nuevo o consulte con Administrador de Sistema'})
     return render(request, 'usuario/login.html')
 
 
@@ -362,13 +362,13 @@ def registrar_administrador_sistema(request):
     return render(request, 'administrador_s/insertar.html', {'formulario': formulario})
 
 
-
+@login_required
 def listar_administradores_s(request):
     administradores_s = AdministradorSistema.objects.all()
     return render(request, 'administrador_s/listar.html', {'administradores_s': administradores_s})
 
 
-
+@login_required
 def gestionar_usuario(request):
     documento = request.GET.get('documento')  # Obtiene el número de documento ingresado
     usuario = None  # Inicializamos usuario en None para evitar errores en la plantilla
@@ -381,7 +381,7 @@ def gestionar_usuario(request):
     return render(request, 'administrador_s/gestionar_usuario.html', {'usuario': usuario})
 
 
-
+@login_required
 def buscar_usuario_documento(request):
     documento = request.GET.get('documento')  # Obtiene el número de documento ingresado
     usuario = None  # Inicializamos usuario en None para evitar errores en la plantilla
@@ -394,24 +394,49 @@ def buscar_usuario_documento(request):
     return render(request, 'administrador_s/buscar_documento.html', {'usuario': usuario})
 
 
-
-
+@login_required
 def buscar_usuarios_nombre(request):
     nombre = request.GET.get('nombre')  # Obtiene el nombre ingresado
-    usuarios = Usuario.objects.none()  # Inicializamos con un queryset vacío
+    usuarios = Usuario.objects.none()  # Iniciar un queryset vacío
     if nombre:
         usuarios = Usuario.objects.filter(first_name__icontains=nombre)
-        if usuarios.exists():
+        if usuarios.exists(): # Un método booleano de existencia de objetos
             messages.success(request, 'Usuario(s) encontrado(s).')  # Mensaje de éxito
         else:
             messages.error(request, 'La búsqueda no arrojó resultados.')  # Mensaje de error    
     return render(request, 'administrador_s/buscar_nombre.html', {'usuarios': usuarios})
 
 
+@login_required
+def usuario_por_parametros(request):
+    criterio = request.GET.get('criterio')  # Obtiene el criterio de búsqueda
+    a_buscar = request.GET.get('a_buscar')
+    usuarios = Usuario.objects.none()  # Iniciar un queryset vacío
+    if criterio:
+        if criterio == 'nombre':
+            usuarios = Usuario.objects.filter(first_name__icontains=a_buscar)
+        elif criterio == 'apellido':
+            usuarios = Usuario.objects.filter(last_name__icontains=a_buscar)
+        elif criterio == 'documento':
+            usuarios = Usuario.objects.filter(num_doc__iexact=a_buscar)
+        elif criterio == 'activos':
+            usuarios = Usuario.objects.filter(is_active=True)
+        elif criterio == 'inactivos':
+            usuarios = Usuario.objects.filter(is_active=False)
+        else:
+            usuarios = Usuario.objects.filter(email=a_buscar)
+        if usuarios.exists(): # Un método booleano de existencia de objetos
+            messages.success(request, 'Usuario(s) encontrado(s).')  # Mensaje de éxito
+        else:
+            messages.error(request, 'La búsqueda no arrojó resultados.')  # Mensaje de error    
+    return render(request, 'administrador_s/buscar_parametros.html', {'usuarios': usuarios})
+
+@login_required
 def ver_perfil_administrador_s(request):
     return render(request, 'administrador_s/perfil.html')
 
 
+@login_required
 def activar_usuario(request, usuario_id):
     usuario_activar = get_object_or_404(Usuario, id=usuario_id)
     if usuario_activar == request.user:

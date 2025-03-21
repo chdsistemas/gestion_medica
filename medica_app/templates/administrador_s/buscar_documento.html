@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <h1>Buscar usuario por documento de identidad</h1>
+    <h1>Buscar usuario por número de documento</h1>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
@@ -16,40 +16,38 @@
     {% endif %}
 
     <form method="GET" action="{% url 'buscar_usuario_documento' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
-        <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
+        <!--GET envía datos por la URL, no modifica datos en el servidor, no necesita un token-->
         <input type="number" name="documento" value="{{ request.GET.documento }}" placeholder="Escriba el documento de identidad:">
         <button type="submit">Buscar Usuario</button>
     </form>
 
     {% if usuario is not None %}
-    <h3>Usuario encontrado:</h3>
-    {% if usuario %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Documento</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Activo en sistema</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ usuario.id }}</td>
-                    <td>{{ usuario.num_doc }}</td>
-                    <td>{{ usuario.first_name }}</td>
-                    <td>{{ usuario.last_name }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.rol }}</td>
-                    <td>{{ usuario.is_active }}</td>
-                </tr>
-            </tbody>
-        </table>
-    {% else %}
-        <p>No se encontró un registro. Verifique de nuevo.</p>
+        <h3>Usuario encontrado:</h3>
+        {% if usuario %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Activo en sistema</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.num_doc }}</td>
+                        <td>{{ usuario.first_name }}</td>
+                        <td>{{ usuario.last_name }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.rol }}</td>
+                        <td>{{ usuario.is_active }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
     {% endif %}
-{% endif %}
 {% endblock %}
