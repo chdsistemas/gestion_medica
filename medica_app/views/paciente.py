@@ -40,7 +40,7 @@ def detallar_paciente(request, paciente_id):
 def actualizar_paciente(request, paciente_id):
     paciente = get_object_or_404(Paciente, id=paciente_id)  # Obtiene el paciente a actualizar
     if request.method == 'POST':
-        formulario = FormularioPaciente(request.POST, instance=paciente)  # Envía el paciente actual
+        formulario = PacienteForm(request.POST, instance=paciente)  # Envía el paciente actual
         if formulario.is_valid():
             paciente = formulario.save(commit=False)
             # Si el usuario cambió la contraseña se cifra antes de pasarla al objeto
@@ -53,7 +53,7 @@ def actualizar_paciente(request, paciente_id):
         else:
             messages.error(request, 'Hay errores en el formulario. Verifica los datos.')
     else:
-        formulario = FormularioPaciente(instance=paciente)
+        formulario = PacienteForm(instance=paciente)
     return render(request, 'paciente/actualizar.html', {'formulario': formulario})
 
 
