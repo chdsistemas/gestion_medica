@@ -57,12 +57,14 @@ urlpatterns = [
     path('cita/detallar/<int:paciente_id>/', detallar_paciente, name='detallar_paciente'),
     path('cita/eliminar/<int:paciente_id>/', eliminar_paciente, name='eliminar_paciente'),
 
-    path('administrador_sistema/registrar/', registrar_administrador_sistema, name='registrar_administrador_s'),
-    path('administrador_sistema/listar/', listar_administradores_s, name='listar_administradores_s'),
-    path('administrador_sistema/gestionar/', gestionar_usuario, name='gestionar_usuario'),
-    path('administrador_sistema/activar/<int:usuario_id>/', activar_usuario, name='activar_usuario'),
-    path('administrador_sistema/ver_perfil/', ver_perfil_administrador_s, name='ver_perfil_administrador_s'),
-    path('administrador_sistema/buscar_usuario_doc/', buscar_usuario_documento, name='buscar_usuario_documento'),
-    path('administrador_sistema/buscar_usuarios_nombre/', buscar_usuarios_nombre, name='buscar_usuarios_nombre'),
-    path('administrador_sistema/buscar_general/', usuario_por_parametros, name='buscar_usuarios_parametros'),
+    path('adm_sistema/registrar/', registrar_adm_sistema, name='registrar_adm_sistema'),
+    path('adm_sistema/listar/', listar_adm_sistema, name='listar_adm_sistema'),
+    path('adm_sistema/gestionar/', gestionar_usuario, name='gestionar_usuario'),
+    path('adm_sistema/activar/<int:usuario_id>/', activar_usuario, name='activar_usuario'),
+    path('adm_sistema/ver_perfil/', ver_perfil_adm_sistema, name='ver_perfil_adm_sistema'),
+    path('adm_sistema/buscar_usuario_doc/', buscar_usuario_documento, name='buscar_usuario_documento'),
+    path('adm_sistema/buscar_usuarios_nombre/', buscar_usuarios_nombre, name='buscar_usuarios_nombre'),
+    path('adm_sistema/buscar_general/', usuario_por_parametros, name='buscar_usuarios_parametros')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

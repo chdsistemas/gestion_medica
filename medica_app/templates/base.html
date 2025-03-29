@@ -29,7 +29,7 @@
                     <li><a href="{% url 'listar_usuarios_filtrados' %}">Busqueda general de usuarios</a></li>
                     <li><a href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
                     <li><a href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
-                    <li><a href="{% url 'listar_administradores_s' %}">Listar Administradores de Sistema</a></li>
+                    <li><a href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
                     <li><a href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
                     {% else %}
                         <li><a href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
@@ -41,7 +41,7 @@
                     <li><a href="{% url 'registrar_usuario' %}">Registrarme</a></li>
                     <li><a href="{% url 'registrar_medico' %}">Registrar Médico</a></li>
                     <li><a href="{% url 'registrar_paciente' %}">Registrar Paciente</a></li>
-                    <li><a href="{% url 'registrar_administrador_s' %}">Registrar Administrador de Sistema</a></li>
+                    <li><a href="{% url 'registrar_adm_sistema' %}">Registrar Administrador de Sistema</a></li>
                 
                     
                     <li><a href="{% url 'login' %}">Iniciar sesión</a></li>

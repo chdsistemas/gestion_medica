@@ -15,8 +15,8 @@
         {% endfor %}
     {% endif %}
 
-    <form method="GET" action="{% url 'listar_usuarios_filtrados' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
-        <!--GET a diferencia de POST no modifica datos en el servidor y no necesita un token-->
+    <form method="GET" action="{% url 'listar_usuarios_filtrados' %}"> <!--Método GET recomendado para solicitar datos-->
+        <!--GET no modifica datos en el servidor y no necesita un token-->
         <input type="text" name="consultaSQL" value="{{ request.GET.consultaSQL }}" placeholder="Nombre del usuario a buscar:">
         <button type="submit">Buscar Usuarios</button>
     </form>
