@@ -13,6 +13,10 @@ class AdministradorSistema(Usuario):
     fecha_ingreso = models.DateField()
 
 
+    class Meta:
+        db_table = 'adm_sistemas'
+        
+    
     def habilitar_usuario(self, usuario):
         usuario.is_active = True
         usuario.save()

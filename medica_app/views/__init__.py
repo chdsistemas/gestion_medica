@@ -7,3 +7,4 @@ from .home import home
 from .medico import *
 from .paciente import *
 from .usuario import *
+from .sede import *

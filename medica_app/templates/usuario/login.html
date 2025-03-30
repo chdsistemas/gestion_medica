@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<h3>Inicio de sesión</h3>
+<h3>Iniciar la sesión</h3>
 <form action="" method="POST">
     {% csrf_token %}
 
@@ -20,7 +20,7 @@
 
     <p>{{ mensaje_error }}<p>
 
-    <button>Iniciar sesión</button>
+    <button type="submit">Iniciar sesión</button>
 </form>
 
 {% endblock %}

@@ -5,17 +5,10 @@ from medica_app.models.cita_medica import CitaMedica
 class CitaMedicaForm(forms.ModelForm):
     class Meta:
         model = CitaMedica
-        fields = [
-            'codigo',
-            'ciudad',
-            'direccion',
-            'paciente',
-            'medico',
-            'fecha',
-            'hora',
-            'consultorio'
-            ]
+        fields = '__all__'
+        
         widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date'})
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'hora': forms.TimeInput(attrs={'type': 'time'})
         }
         

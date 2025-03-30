@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'medica_app'
+    'rest_framework',
+    'medica_app',
+    'api_app'
 ]
 
 MIDDLEWARE = [

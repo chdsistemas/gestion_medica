@@ -9,6 +9,11 @@ class AgendaMedica(models.Model):
     hora_final = models.TimeField()
     turno_disponible = models.BooleanField(default=True)
 
+    
+    class Meta:
+        db_table = 'agendas_medicas'
+
+
     def __str__(self):
         return f'{self.medico.first_name} - {self.medico.last_name}'
     

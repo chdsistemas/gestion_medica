@@ -62,5 +62,3 @@ def eliminar_paciente(request, paciente_id):
     paciente = get_object_or_404(Paciente, id = paciente_id)
     paciente.delete()
     return redirect('listar_pacientes')
-
-

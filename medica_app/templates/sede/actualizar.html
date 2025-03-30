@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar datos de sede médica
+{% endblock %}
+
+{% block content %}
+
+    <h3>Actualizar sede</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Actualizar Sede</button>
+    </form>
+
+{% endblock %}

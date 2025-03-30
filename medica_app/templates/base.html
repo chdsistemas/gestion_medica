@@ -26,11 +26,12 @@
                     {% elif request.user.administradorsistema %}
                         <li><li><a href="{% url 'gestionar_usuario' %}">Gestionar usuario</a></li></li>
                         <li><a href="{% url 'listar_usuarios' %}">Listar usuarios</a></li>
-                    <li><a href="{% url 'listar_usuarios_filtrados' %}">Busqueda general de usuarios</a></li>
-                    <li><a href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
-                    <li><a href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
-                    <li><a href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
-                    <li><a href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
+                        <li><a href="{% url 'listar_usuarios_filtrados' %}">Busqueda general de usuarios</a></li>
+                        <li><a href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
+                        <li><a href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
+                        <li><a href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
+                        <li><a href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
+                        <li><a href="{% url 'registrar_sede' %}">Registrar Sede Medica</a></li>
                     {% else %}
                         <li><a href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
                     {% endif %}

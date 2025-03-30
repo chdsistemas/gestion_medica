@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar sedes de atención médica
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if sedes %}
+                {% for sede in sedes %}
+                <tr>
+                    <td>{{ sede.codigo }}</td>
+                    <td>{{ sede.nombre }}</td>
+                    <td>{{ sede.descripcion }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_sede' sede.id %}">Actualizar</a>
+                        <a href="{% url 'detallar_sede' sede.id %}">Detalles</a>
+                        <a href="{% url 'eliminar_sede' sede.id %}">Eliminar</a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay sedes registradas en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

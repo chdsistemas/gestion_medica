@@ -6,3 +6,9 @@ from .cita_medica import CitaMedica
 from .medico import Medico
 from .usuario import Usuario
 from .paciente import Paciente
+from .especialidad import Especialidad
+from .sede import Sede
+from .autorizacion import Autorizacion
+from .orden_medica import OrdenMedica
+from .prestador import Prestador
+

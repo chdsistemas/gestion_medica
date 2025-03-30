@@ -14,6 +14,10 @@ class Paciente(Usuario):
     genero = models.CharField(max_length=50, blank=False, verbose_name='Género de paciente', choices=GENERO, default='FEMENINO')
     
     
+    class Meta:
+        db_table = 'pacientes'
+        
+    
     def __str__(self):
         return f'{self.first_name} - {self.last_name}'
     
