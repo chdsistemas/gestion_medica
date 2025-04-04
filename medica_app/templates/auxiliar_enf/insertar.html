@@ -14,10 +14,13 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <button type="submit">Registrar nuevo Auxiliar</button>
-    </form>
+
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <button type="submit">Registrar nuevo Auxiliar</button>
+        </form>
+
 {% endblock %}
 

@@ -8,13 +8,14 @@
 
 {% block content %}
 
-    <h1>Búsqueda de usuarios por criterios</h1>
+    <h4>Búsqueda de usuarios por criterios</h4>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
 
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
     <form method="GET" action="{% url 'buscar_usuarios_parametros' %}">
         <label for="">Criterio de Búsqueda:</label>
         <select name="criterio" id="">

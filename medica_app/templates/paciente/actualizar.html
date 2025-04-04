@@ -14,11 +14,14 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
-            Actualizar paciente
-        </button>
-    </form>
+
+        <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
+                Actualizar paciente
+            </button>
+        </form>
+
 {% endblock %}

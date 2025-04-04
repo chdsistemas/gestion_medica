@@ -8,19 +8,21 @@
 
 {% block content %}
 
-    <h3>Actualizar Administrador de Sistema</h3>
+    <h4>Actualizar Administrador de Sistema</h4>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
    
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
-            Actualizar Administrador de Sistema
-        </button>
-    </form>
-    
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+  
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
+                Actualizar Administrador de Sistema
+            </button>
+        </form>
+  
 {% endblock %}

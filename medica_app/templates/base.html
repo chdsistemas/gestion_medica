@@ -5,59 +5,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Bienvenido a Gestion CIDE web app{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/mis_estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        .navbar {
+            background-color: #343a40; /* Color de fondo profesional */
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: white; /* Color del texto blanco */
+        }
+        .navbar-light .navbar-nav .nav-link:hover,
+        .navbar-light .navbar-nav .nav-link:focus {
+            color: #17a2b8; /* Color de texto al pasar el mouse o enfocar */
+        }
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            background-color: #343a40; /* Color de fondo del menú desplegable */
+        }
+        .dropdown-item {
+            color: white; /* Color del texto del menú desplegable */
+        }
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: #495057; /* Color de fondo al pasar el mouse o enfocar */
+            color: #17a2b8; /* Color del texto al pasar el mouse o enfocar */
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                {% if request.user.is_authenticated %}
-
-                    {% if request.user.medico %}
-                        <li><a href="{% url 'perfil_medico' %}">Ver mi perfil médico</a></li>
-                        <li><a href="#">Consultar historia clínica</a></li>
-                        <li><a href="{% url 'listar_mis_citas' %}">Consultar mis citas médicas</a></li>
-                        <li><a href="#">Nueva historia clínica</a></li>                        
-                    
-                    {% elif request.user.paciente %}
-                        <li><a href="#">Ver mi perfil de paciente</a></li>
-                        <li><a href="{% url 'registrar_cita' %}">Solicitar cita médica</a></li>
-                    
-                    {% elif request.user.administradorsistema %}
-                        <li><li><a href="{% url 'gestionar_usuario' %}">Gestionar usuario</a></li></li>
-                        <li><a href="{% url 'listar_usuarios' %}">Listar usuarios</a></li>
-                        <li><a href="{% url 'listar_usuarios_filtrados' %}">Busqueda general de usuarios</a></li>
-                        <li><a href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
-                        <li><a href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
-                        <li><a href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
-                        <li><a href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
-                        <li><a href="{% url 'registrar_sede' %}">Registrar Sede Medica</a></li>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.medico %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'perfil_medico' %}">Ver mi perfil médico</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Consultar historia clínica</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_mis_citas' %}">Consultar mis citas médicas</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Nueva historia clínica</a></li>
+                        {% elif request.user.paciente %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Ver mi perfil de paciente</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_cita' %}">Solicitar cita médica</a></li>
+                        {% elif request.user.administradorsistema %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'gestionar_usuario' %}">Gestionar usuario</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_usuarios' %}">Listar usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_usuarios_filtrados' %}">Busqueda general de usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_sede' %}">Registrar Sede Medica</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a></li>
                     {% else %}
-                        <li><a href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Registrar
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'registrar_medico' %}">Registrar Médico</a></li>
+                                <li><a class="dropdown-item" href="{% url 'registrar_paciente' %}">Registrar Paciente</a></li>
+                                <li><a class="dropdown-item" href="{% url 'registrar_adm_sistema' %}">Registrar Administrador de Sistema</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar sesión</a></li>
                     {% endif %}
-      
-                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-                {% else %}
-                    <li><a href="{% url 'home' %}">Inicio</a></li>
-                    <li><a href="{% url 'registrar_usuario' %}">Registrarme</a></li>
-                    <li><a href="{% url 'registrar_medico' %}">Registrar Médico</a></li>
-                    <li><a href="{% url 'registrar_paciente' %}">Registrar Paciente</a></li>
-                    <li><a href="{% url 'registrar_adm_sistema' %}">Registrar Administrador de Sistema</a></li>
-                
-                    
-                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                {% endif %}
-            </ul>
+                </ul>
+            </div>
         </nav>
     </header>
 
     {% block content %}
-
     {% endblock %}
 
-
     <footer>
-        <p>2025 - CIDE APP - Sistema de Gestion Servicios de Salud - Derechos reservados</p>
+        <div style="display: flex; justify-content: space-around; padding: 20px; background-color: #d9dadb;">
+            <div>
+                <h5>Contacto</h5>
+                <p>Dirección: Calle 123, Soacha Colombia</p>
+                <p>Teléfono: 123-456-7890</p>
+                <p>Correo electrónico: info@cideapp.com</p>
+            </div>
+            <div>
+                <h5>Otros</h5>
+                <ul>
+                    <li><a href="#">Acerca de nosotros</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                    <li><a href="#">Términos de servicio</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Redes</h5>
+                <a href="https://facebook.com" target="_blank">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" width="24">
+                  </a>
+                  <a href="https://instagram.com" target="_blank">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" width="24">
+                  </a>
+                  <a href="https://twitter.com" target="_blank">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="X" width="24">
+                  </a>
+            </div>
+        </div>
+        <p style="text-align: center; padding: 10px; background-color: #e9ecef;">2025 - CIDE APP - Sistema de Gestión Servicios de Salud - Derechos reservados</p>
+        
     </footer>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </body>
 </html>

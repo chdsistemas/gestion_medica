@@ -11,4 +11,6 @@ class CitaMedicaForm(forms.ModelForm):
             'fecha': forms.DateInput(attrs={'type': 'date'}),
             'hora': forms.TimeInput(attrs={'type': 'time'})
         }
-        
+
+
+

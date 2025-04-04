@@ -8,19 +8,20 @@
 
 {% block content %}
 
-<h3>Iniciar la sesión</h3>
-<form action="" method="POST">
-    {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+    <h4>Iniciar la sesión</h4>
+    <form action="" method="POST">
+        {% csrf_token %}
 
-    <label for="">Username</label>
-    <input type="text" name="username" required>
+        <label for="">Username</label>
+        <input type="text" name="username" required>
 
-    <label for="">Contraseña</label>
-    <input type="password" name="password" required>
+        <label for="">Contraseña</label>
+        <input type="password" name="password" required>
 
-    <p>{{ mensaje_error }}<p>
+        <p>{{ mensaje_error }}<p>
 
-    <button type="submit">Iniciar sesión</button>
-</form>
+        <button type="submit">Iniciar sesión</button>
+    </form>
 
 {% endblock %}

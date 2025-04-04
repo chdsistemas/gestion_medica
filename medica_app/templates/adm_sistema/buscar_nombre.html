@@ -8,13 +8,14 @@
 
 {% block content %}
 
-    <h1>Búsqueda de usuarios por nombre</h1>
+    <h4>Búsqueda de usuarios por nombre</h4>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
 
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
     <form method="GET" action="{% url 'buscar_usuarios_nombre' %}">
         <input type="text" name="nombre" value="{{ request.GET.nombre }}" placeholder="Escriba el nombre del usuario:">
         <button type="submit">Buscar Usuarios</button>

@@ -15,10 +15,11 @@
         {% endfor %}
     {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrar Sede</button>
-    </form>
+        <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrar Sede</button>
+        </form>
 
 {% endblock %}

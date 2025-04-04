@@ -7,6 +7,7 @@ class MedicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medico
         fields = [
+            'id',
             'tipo_doc',
             'num_doc',
             'numero_carnet',
@@ -19,6 +20,8 @@ class MedicoSerializer(serializers.ModelSerializer):
             'especialidad',
             'fecha_nac',
             'email',
-            'password',        
+            'password',
             'imagen'
             ]
+        
+        

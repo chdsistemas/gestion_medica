@@ -8,13 +8,14 @@
 
 {% block content %}
 
-    <h1>Buscar usuario por número de documento</h1>
+    <h4>Buscar usuario por número de documento</h4>
     {% if messages %}
         {% for message in messages %}
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
 
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
     <form method="GET" action="{% url 'buscar_usuario_documento' %}"> <!--Método GET recomendado para solicitar datos del servidor-->
         <!--GET envía datos por la URL, no modifica datos en el servidor, no necesita un token-->
         <input type="number" name="documento" value="{{ request.GET.documento }}" placeholder="Escriba el documento de identidad:">
