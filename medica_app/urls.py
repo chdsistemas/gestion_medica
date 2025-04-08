@@ -53,8 +53,13 @@ urlpatterns = [
     path('sede/listar/', SedeListView.as_view(), name='listar_sedes'),
     path('sede/actualizar/<int:pk>/', SedeUpdateView.as_view(), name='actualizar_sede'),
     path('sede/detallar/<int:pk>/', SedeDetailView.as_view(), name='detallar_sede'),
-    path('sede/eliminar/<int:pk>/', SedeDeleteView.as_view(), name='eliminar_sede')
+    path('sede/eliminar/<int:pk>/', SedeDeleteView.as_view(), name='eliminar_sede'),
 
+    path('especialidad/registrar/', EspecialidadCreateView.as_view(), name='registrar_especialidad'),
+    path('especialidad/listar/', EspecialidadListView.as_view(), name='listar_especialidades'),
+    path('especialidad/actualizar/<int:pk>/', EspecialidadUpdateView.as_view(), name='actualizar_especialidad'),
+    path('especialidad/detallar/<int:pk>/', EspecialidadDetailView.as_view(), name='detallar_especialidad'),
+    path('especialidad/eliminar/<int:pk>/', EspecialidadDeleteView.as_view(), name='eliminar_especialidad')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

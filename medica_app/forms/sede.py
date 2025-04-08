@@ -6,5 +6,3 @@ class SedeForm(forms.ModelForm):
     class Meta:
         model = Sede
         fields = ['codigo', 'nombre', 'descripcion']
-        
-

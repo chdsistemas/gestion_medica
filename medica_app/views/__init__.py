@@ -8,3 +8,5 @@ from .medico import *
 from .paciente import *
 from .usuario import *
 from .sede import *
+from .especialidad import *
+

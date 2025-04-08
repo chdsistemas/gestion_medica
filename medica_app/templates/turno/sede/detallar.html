@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalles sede de atención médica
+{% endblock %}
+
+{% block content %}
+
+    <h4>Detalles sede médica</h4>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <h4>Sede Id: {{ sede.id }}</h4>
+    <h4>Nombre: {{ sede.nombre }}</h4>
+    <h4>Descripción: {{ sede.descripcion }}</h4>
+
+    <a href="{% url 'listar_sedes' %}">Listar las sedes</a>
+
+{% endblock %}

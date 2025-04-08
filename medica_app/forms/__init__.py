@@ -7,3 +7,4 @@ from .paciente import PacienteForm
 from .usuario import UsuarioForm
 from .prestador import PrestadorForm
 from .sede import SedeForm
+from .especialidad import EspecialidadForm

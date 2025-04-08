@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalles sede de especialidad médica
+{% endblock %}
+
+{% block content %}
+
+    <h4>Detalles especialidad médica</h4>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <h4>Especialidad Id: {{ sede.id }}</h4>
+    <h4>Codigo: {{ especialidad.codigo }}</h4>
+    <h4>Nombre: {{ especialidad.nombre }}</h4>
+    <h4>Descripción: {{ especialidad.descripcion }}</h4>
+
+    <a href="{% url 'listar_especialidades' %}">Listar las especialidades médicas</a>
+
+{% endblock %}

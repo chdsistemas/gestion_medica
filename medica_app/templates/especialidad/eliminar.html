@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Confirmación de eliminación especialidad médica
+{% endblock %}
+
+{% block content %}
+
+    <h3>Eliminar especialidad médica</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>¿Desea eliminar la especialidad?:  {{ object.nombre }}</p>
+    <p>{{ object.nombre }}</p>
+    <p>{{ object.descripcion }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Si. Eliminar</button>
+    </form>
+
+    <a href="{% url 'listar_especialidades' %}">Listar sedes</a>
+
+{% endblock %}

@@ -55,7 +55,8 @@
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_sede' %}">Registrar Sede Medica</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_sede' %}">Registrar Sede</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_sedes' %}">Listar Sedes</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
                         {% endif %}

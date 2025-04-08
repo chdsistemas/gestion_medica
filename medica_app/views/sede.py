@@ -5,6 +5,7 @@ from medica_app.models.sede import Sede
 from medica_app.forms.sede import SedeForm
 
 
+# Vista basada en clases para crear objetos de Sede Médica
 class SedeCreateView(CreateView):
     model = Sede
     form_class = SedeForm
@@ -12,14 +13,14 @@ class SedeCreateView(CreateView):
     success_url = reverse_lazy('listar_sedes')
 
 
-#@login_required
+# Lista de sedes
 class SedeListView(ListView):
     model = Sede
     template_name = 'sede/listar.html'
     context_object_name = 'sedes' # Variable que se pasará al archivo listar.html
 
 
-#@login_required
+# Actualizar una sede por su pk
 class SedeUpdateView(UpdateView):
     model = Sede
     form_class = SedeForm
@@ -27,15 +28,17 @@ class SedeUpdateView(UpdateView):
     success_url = reverse_lazy('listar_sedes')
 
 
-#@login_required
+
 class SedeDetailView(DetailView):
     model = Sede
     template_name = 'sede/detallar.html'
     context_object_name = 'sede' # Objeto a enviar al detalle.html
 
 
-#@login_required
+
 class SedeDeleteView(DeleteView):
     model = Sede
     template_name = 'sede/eliminar.html'
     success_url = reverse_lazy('listar_sedes')
+
+

@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -50,8 +51,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'medica_app',
-    'api_app'
+    'api_app',
+    'drf_spectacular',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API de Servicios médicos',
+    'DESCRIPTION': 'Documentación de la API de servicios médicos CIDE.',
+    'VERSION': '1.0.0',
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
