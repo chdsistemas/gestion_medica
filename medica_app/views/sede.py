@@ -40,5 +40,3 @@ class SedeDeleteView(DeleteView):
     model = Sede
     template_name = 'sede/eliminar.html'
     success_url = reverse_lazy('listar_sedes')
-
-

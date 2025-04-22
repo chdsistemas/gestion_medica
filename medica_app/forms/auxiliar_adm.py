@@ -1,10 +1,10 @@
 from django import forms
-from medica_app.models.aux_enfermeria import AuxiliarEnfermeria
+from medica_app.models.aux_administrativo import AuxiliarAdministrativo
 
 
-class AuxiliarEnfermeriaForm(forms.ModelForm):
+class AuxiliarAdministrativoForm(forms.ModelForm):
     class Meta:
-        model = AuxiliarEnfermeria
+        model = AuxiliarAdministrativo
         fields = [
             'tipo_doc',
             'num_doc',
@@ -17,11 +17,11 @@ class AuxiliarEnfermeriaForm(forms.ModelForm):
             'fecha_nac',
             'email',
             'password',
-            'departamento',        
             'imagen'
             ]
         widgets = {
             'password': forms.PasswordInput(),
             'fecha_nac': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_ing': forms.DateInput(attrs={'type': 'date'}),
             'imagen': forms.FileInput()
         }

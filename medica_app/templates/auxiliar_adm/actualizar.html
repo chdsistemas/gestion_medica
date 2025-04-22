@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar Auxiliar Administrativo
+{% endblock %}
+
+{% block content %}
+
+    <h3>Actualizar Auxiliar Administrativo</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+        <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Actualizar Auxiliar Administrativo</button>
+        </form>
+
+{% endblock %}

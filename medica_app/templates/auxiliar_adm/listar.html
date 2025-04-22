@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar auxiliar administrativos
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+    <table>
+        <thead>
+            <tr>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if aux_adm %}
+                {% for a in aux_adm %}
+                <tr>
+                    <td>{{ a.num_doc }}</td>
+                    <td>{{ a.first_name }}</td>
+                    <td>{{ a.last_name }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_aux_adm' a.pk %}">Actualizar</a>
+                        <a href="{% url 'detallar_aux_adm' a.pk %}">Ver Detalles</a>
+                        <a href="{% url 'eliminar_aux_adm' a.pk %}">Eliminar</a>                        
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay auxiliares administrativos en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

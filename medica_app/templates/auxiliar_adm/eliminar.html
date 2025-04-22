@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Confirmación de eliminación Auxiliar Administrativo
+{% endblock %}
+
+{% block content %}
+
+    <h3>Eliminar auxiliar administrativo</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>¿Desea eliminar el auxiliar administrativo?:  {{ object.num_doc }}</p>
+    <p>{{ object.num_doc }}</p>
+    <p>{{ object.first_name }}</p>
+    <p>{{ object.last_name }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Si. Eliminar</button>
+    </form>
+
+    <a href="{% url 'listar_aux_adm' %}">Listar auxiliar administrativo</a>
+
+{% endblock %}

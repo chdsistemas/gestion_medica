@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalles del consultorio
+{% block content %}
+
+    <h4>Detalles del consultorio</h4>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <h4>Id: {{ consultorio.id }}</h4>
+    <h4>Codigo: {{ consultorio.ciudad }}</h4>
+    <h4>Sede: {{ consultorio.direccion }}</h4>
+
+    <a href="{% url 'listar_sedes' %}">Listar los consultorios</a>
+
+{% endblock %}

@@ -3,7 +3,7 @@ from medica_app.models.usuario import Usuario
 
 
 class AuxiliarAdministrativo(Usuario):
-    fecha_ingreso = models.DateField(auto_now_add=True)
+    fecha_ing = models.DateField(verbose_name='Fecha de ingreso institucional', auto_now=True)
 
     
     class Meta:
@@ -12,4 +12,11 @@ class AuxiliarAdministrativo(Usuario):
 
     def __str__(self):
         return f'{self.usuario.fist_name} - {self.usuario.last_name}'
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Solo asignar si el objeto auxiliaradminisrativo es nuevo
+            self.rol = 'AUXA'
+            self.is_active = True
+        super().save(*args, **kwargs)
 

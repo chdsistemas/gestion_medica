@@ -59,7 +59,13 @@ urlpatterns = [
     path('especialidad/listar/', EspecialidadListView.as_view(), name='listar_especialidades'),
     path('especialidad/actualizar/<int:pk>/', EspecialidadUpdateView.as_view(), name='actualizar_especialidad'),
     path('especialidad/detallar/<int:pk>/', EspecialidadDetailView.as_view(), name='detallar_especialidad'),
-    path('especialidad/eliminar/<int:pk>/', EspecialidadDeleteView.as_view(), name='eliminar_especialidad')
+    path('especialidad/eliminar/<int:pk>/', EspecialidadDeleteView.as_view(), name='eliminar_especialidad'),    
+
+    path('auxiliar_adm/registrar/', AuxiliarAdministrativoCreateView.as_view(), name='registrar_aux_adm'),
+    path('auxiliar_adm/listar/', AuxiliarAdministrativoListView.as_view(), name='listar_aux_adm'),
+    path('auxiliar_adm/actualizar/<int:pk>/', AuxiliarAdministrativoUpdateView.as_view(), name='actualizar_aux_adm'),
+    path('auxiliar_adm/detallar/<int:pk>/', AuxiliarAdministrativoDetailView.as_view(), name='detallar_aux_adm'),
+    path('auxiliar_adm/eliminar/<int:pk>/', AuxiliarAdministrativoDeleteView.as_view(), name='eliminar_aux_adm')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

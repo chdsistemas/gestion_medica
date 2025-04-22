@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Listar consultorios médicos
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+    <table>
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Ciudad</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if consultorios %}
+                {% for c in consultorios %}
+                <tr>
+                    <td>{{ c.codigo }}</td>
+                    <td>{{ c.ciudad }}</td>
+                    <td>{{ c.direccion }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_consultorio' c.id %}">Actualizar</a>
+                        <a href="{% url 'detallar_consultorio' c.id %}">Detalles</a>
+                        <a href="{% url 'eliminar_consultorio' c.id %}">Eliminar</a>                        
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <p>No hay consultorios registradas en el sistema</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

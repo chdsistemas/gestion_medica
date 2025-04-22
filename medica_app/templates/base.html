@@ -39,14 +39,17 @@
             <div class="container-fluid">
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
+                
                         {% if request.user.medico %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'perfil_medico' %}">Ver mi perfil médico</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Consultar historia clínica</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_mis_citas' %}">Consultar mis citas médicas</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Nueva historia clínica</a></li>
+                    
                         {% elif request.user.paciente %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Ver mi perfil de paciente</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_cita' %}">Solicitar cita médica</a></li>
+                        
                         {% elif request.user.administradorsistema %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'gestionar_usuario' %}">Gestionar usuario</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_usuarios' %}">Listar usuarios</a></li>
@@ -54,9 +57,16 @@
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuario_documento' %}">Buscar por número de documento</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_nombre' %}">Buscar usuarios por nombre</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_adm_sistema' %}">Listar Administradores de Sistema</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'buscar_usuarios_parametros' %}">Buscar por parámetros</a></li>       
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_aux_adm' %}">Registrar Auxiliar Administrativo</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_aux_adm' %}">Listar Auxiliares Administrativos</a></li>
+                                                    
+                        {% elif request.user.auxiliaradministrativo %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_sede' %}">Registrar Sede</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_sedes' %}">Listar Sedes</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'actualizar_sede' sede.id %}">Actualizar Sedes</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_sede' sede.id %}">Detallar Sede</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'eliminar_sede' sede.id %}">Eliminar Sede</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
                         {% endif %}
@@ -71,6 +81,7 @@
                                 <li><a class="dropdown-item" href="{% url 'registrar_medico' %}">Registrar Médico</a></li>
                                 <li><a class="dropdown-item" href="{% url 'registrar_paciente' %}">Registrar Paciente</a></li>
                                 <li><a class="dropdown-item" href="{% url 'registrar_adm_sistema' %}">Registrar Administrador de Sistema</a></li>
+                                <li><a class="dropdown-item" href="{% url 'registrar_aux_adm' %}">Registrar Auxiliar Administrativo</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar sesión</a></li>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalles auxiliar Administrativo
+{% endblock %}
+
+{% block content %}
+
+    <h4>Detalles Auxiliar Administrativo</h4>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <h4>Id: {{ aux_adm.id }}</h4>
+    <h4>Nombre: {{ aux_adm.first_name }}</h4>
+    <h4>Apellido: {{ aux_adm.last_name }}</h4>
+
+    <a href="{% url 'listar_aux_adm' %}">Listar Auxiliar Administrativo</a>
+
+{% endblock %}

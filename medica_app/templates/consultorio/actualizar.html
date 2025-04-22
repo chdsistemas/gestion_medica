@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar datos del consultorio
+{% endblock %}
+
+{% block content %}
+
+    <h3>Actualizar consultorio</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+        <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Actualizar Consultorio</button>
+        </form>
+
+{% endblock %}

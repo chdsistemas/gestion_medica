@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Confirmación de eliminación de consultorio
+{% endblock %}
+
+{% block content %}
+
+    <h3>Eliminar consultorio médico</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>¿Desea eliminar la consultorio?:  {{ object.codigo }}</p>
+    <p>{{ object.codigo }}</p>
+    <p>{{ object.ciudad }}</p>
+    <p>{{ object.sede }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Si. Eliminar</button>
+    </form>
+
+    <a href="{% url 'listar_sedes' %}">Listar consultorios</a>
+
+{% endblock %}

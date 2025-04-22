@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Detalles de la agenda médica
+{% endblock %}
+
+{% block content %}
+
+    <h4>Detalles agenda médica</h4>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <h4>Agenda Id: {{ agenda.id }}</h4>
+    <h4>Fecha: {{ agenda.fecha }}</h4>
+    <h4>Hora inicial: {{ agenda.hora_inicio }}</h4>
+    <h4>Hora final: {{ agenda.hora_fin }}</h4>
+
+
+    <a href="{% url 'listar_agendas' %}">Listar agendas médicas</a>
+
+{% endblock %}
+
