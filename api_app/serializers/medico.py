@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from medica_app.models.medico import Medico
+from web_app.models.medico import Medico
 
 
 class MedicoSerializer(serializers.ModelSerializer):

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Actualizar Medico
+{% endblock %}
+
+{% block content %}
+
+    <h3>Actualizar Médico</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <button type="submit" onclick="return confirm('Debe iniciar sesión para activar los cambios')">
+                Actualizar médico
+            </button>
+        </form>
+
+{% endblock %}

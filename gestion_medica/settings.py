@@ -17,7 +17,7 @@ SESSION_COOKIE_AGE = 600  # 600 segundos, la sesión dura hasta este tiempo en i
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # La sesión se elimina al cerrar el navegador
 SESSION_SAVE_EVERY_REQUEST = True  # Reinicia el contador de tiempo con cada solicitud
 
-AUTH_USER_MODEL = 'medica_app.Usuario'
+AUTH_USER_MODEL = 'web_app.Usuario'
 
 from pathlib import Path
 
@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-1^22&xruq2k4gqf5dymp_z&e=j1fmhkj6z16s+=6q8!$v2#$l*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.30.5.40', '127.0.0.1']
+ALLOWED_HOSTS = ['172.30.5.6', '127.0.0.1']
 
 
 # Application definition
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'medica_app',
+    'web_app',
     'api_app',
     'drf_spectacular',
 ]
@@ -85,7 +85,7 @@ ROOT_URLCONF = 'gestion_medica.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['medica_app/templates'],
+        'DIRS': ['web_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,7 +152,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = ['medica_app/public']
+STATICFILES_DIRS = ['web_app/public']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
