@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'web_app',
     'api_app',
-    'drf_spectacular',
+    'drf_spectacular'
 ]
 
 REST_FRAMEWORK = {
@@ -158,3 +158,23 @@ STATICFILES_DIRS = ['web_app/public']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Configurar datos API para conectar con Servidor de correo Gmail:
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Para una cuenta Gmail en el servidor
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'chdsistemas@gmail.com'
+EMAIL_HOST_PASSWORD = 'moou xrac bpxm xqjx'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+# Configurar zona horaria de nuestra región
+
+USE_TZ = False # No usar horas de zonas horarias UTC
+TIME_ZONE = 'America/Bogota'
+
+

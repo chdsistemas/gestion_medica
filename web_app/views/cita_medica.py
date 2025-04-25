@@ -13,6 +13,7 @@ def registrar_cita_medica(request):
         formulario = CitaMedicaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
+
             messages.success(request, 'Cita médica creada exitosamente.')
             return redirect('registrar_cita')
         else:

@@ -4,7 +4,7 @@ from web_app.models.prestador import Prestador
 from web_app.models.medico import Medico
 
 class Autorizacion(models.Model):
-    codigo = codigo = models.CharField(max_length=100, unique=True, verbose_name='Código de la autorización de servicios')
+    codigo = models.CharField(max_length=50, unique=True, verbose_name='Código de la autorización de servicios')
     orden_medica = models.OneToOneField(OrdenMedica, on_delete=models.PROTECT, related_name='autorizaciones')
     prestador = models.ForeignKey(Prestador, on_delete=models.PROTECT, related_name='autorizaciones')
     fecha = models.DateTimeField(auto_now_add=True)

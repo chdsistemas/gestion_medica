@@ -64,11 +64,10 @@
                         {% elif request.user.auxiliaradministrativo %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registrar_sede' %}">Registrar Sede</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'listar_sedes' %}">Listar Sedes</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'actualizar_sede' sede.id %}">Actualizar Sedes</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_sede' sede.id %}">Detallar Sede</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'eliminar_sede' sede.id %}">Eliminar Sede</a></li>
+
                         {% else %}
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'detallar_usuario' %}">Ver mis datos de usuario</a></li>
+
                         {% endif %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a></li>
                     {% else %}
@@ -98,7 +97,7 @@
         <div style="display: flex; justify-content: space-around; padding: 20px; background-color: #d9dadb;">
             <div>
                 <h5>Contacto</h5>
-                <p>Dirección: Calle 123, Soacha Colombia</p>
+                <p>Dirección: Calle 10 # 13-103, Soacha Colombia</p>
                 <p>Teléfono: 123-456-7890</p>
                 <p>Correo electrónico: info@cideapp.com</p>
             </div>

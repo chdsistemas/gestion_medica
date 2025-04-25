@@ -17,6 +17,6 @@ class AuxiliarAdministrativo(Usuario):
     def save(self, *args, **kwargs):
         if not self.pk:  # Solo asignar si el objeto auxiliaradminisrativo es nuevo
             self.rol = 'AUXA'
-            self.is_active = True
+            self.is_active = False
         super().save(*args, **kwargs)
 

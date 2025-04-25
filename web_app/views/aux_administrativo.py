@@ -12,6 +12,13 @@ class AuxiliarAdministrativoCreateView(CreateView):
     template_name = 'auxiliar_adm/registrar.html'
     success_url = reverse_lazy('listar_aux_adm')
 
+    def form_valid(self, form):
+        # Cifra la contraseña antes de guardar el auxiliar
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])  # importante
+        user.save()
+        return super().form_valid(form)
+
 
 # Lista de auxiliares administrativos
 class AuxiliarAdministrativoListView(ListView):

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Notificación de Cita Médica Agendada</title>
+</head>
+<body>
+    <p>Respetado(a) {{ usuario.first_name }} {{ usuario.last_name }},</p>
+    <p>Su cita médica ha sido agendada con los siguientes detalles:</p>
+    <ul>
+        <li><strong>Código de Cita:</strong> {{ cita.codigo }}</li>
+        <li><strong>Médico:</strong> {{ cita.medico.first_name }} {{ cita.medico.last_name }}</li>
+        <li><strong>Fecha:</strong> {{ cita.fecha|date:"d/m/Y" }}</li>
+        <li><strong>Hora:</strong> {{ cita.hora|time:"h:i A" }}</li>
+        <li><strong>Ciudad:</strong> {{ cita.ciudad }}</li>
+        <li><strong>Sede:</strong> {{ cita.sede }}</li>
+        <li><strong>Consultorio:</strong> {{ cita.consultorio }}</li>
+    </ul>
+    <p>Le esperamos en la fecha y hora indicadas.</p>
+    <p>Un atento saludo,</p>
+    <p>Citas Médicas App Web</p>
+</body>
+</html>
